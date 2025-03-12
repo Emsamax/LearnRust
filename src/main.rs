@@ -1,6 +1,10 @@
 mod control_flow_basics;
 mod tuples_arrays;
 mod references;
+mod user_defined_types;
+mod elevator;
+
+static BANNER: &str = "Welcome to RustOS 3.14";
 
 fn main() {
     println!("Hello, 🌍!");
@@ -46,7 +50,7 @@ fn main() {
     references::test_tuple_ref();
     references::test_slice();
     references::test_string();
-    //references::test_outlive();
+    //references::test_outlive()
 
     println!("Magnitude of a unit vector: {}", references::magnitude(&[0.0, 1.0, 0.0]));
 
@@ -54,6 +58,23 @@ fn main() {
     println!("Magnitude of {v:?}: {}", references::magnitude(&v));
     references::normalize(&mut v);
     println!("Magnitude of {v:?} after normalization: {}", references::magnitude(&v));
+    user_defined_types::peter();
+    let digest = user_defined_types::compute_digest("hello");
+    println!("digest: {digest:?}");
+    println!("{BANNER}");
+    /// ELEVATOR EX
+    println!(
+        "A ground floor passenger has pressed the up button: {:?}",
+        elevator::lobby_call_button_pressed(0, elevator::Direction::Up)
+    );
+    println!("The car has arrived on the ground floor: {:?}", elevator::car_arrived(0));
+    println!("The car door opened: {:?}", elevator::car_door_opened());
+    println!(
+        "A passenger has pressed the 3rd floor button: {:?}",
+        elevator::car_floor_button_pressed(3)
+    );
+    println!("The car door closed: {:?}", elevator::car_door_closed());
+    println!("The car has arrived on the 3rd floor: {:?}", elevator::car_arrived(3));
 }
 
 /*
